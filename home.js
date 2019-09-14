@@ -2,7 +2,7 @@ function homeLogin(){
     var id = document.getElementById('user-id').value;
     var pw = document.getElementById('user-pw').value;
 
-    github.auth(id, pw).then(function(data){
+    github.login(id, pw).then(function(data){
         document.getElementById('user-info').innerHTML = "\<p\>"+data.login+"\<\/p\>"
         document.getElementById('user-info').innerHTML += "\<button onclick='setHash(\"homeGetMyReposList\")'\>MyReposList\<\/button\>"
     }).then(homeGetMyReposList)
@@ -26,4 +26,8 @@ function homeSearchRepos(){
             document.getElementById('repos-list').innerHTML += "\<li\>"+repos.full_name+"\<\/li\>"
         }
     })
+}
+
+function logout(){
+    github.logout();
 }

@@ -9,12 +9,12 @@ function Github() {
 }
 
 Github.prototype.init = function() {
-    this.user_name = null;
-    this.authentication = null;
+    this.user_name = "";
+    this.authentication = "";
 }
 
 /* User Auth */
-Github.prototype.auth = function(user_name_or_email, password) {
+Github.prototype.login = function(user_name_or_email, password) {
     var that = this;
     this.authentication = "Basic " + btoa(user_name_or_email + ":" + password);
     return this.get("https://api.github.com/user").then(function(data) {
@@ -24,6 +24,10 @@ Github.prototype.auth = function(user_name_or_email, password) {
 }
 Github.prototype.user = function() {
     return this.get("https://api.github.com/user");
+}
+Github.prototype.logout = function() {
+    this.user_name = "";
+    this.authentication = "";
 }
 
 /* Repository */

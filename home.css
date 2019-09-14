@@ -1,0 +1,50 @@
+html, body {
+    height: 100%;
+}
+
+header {
+    float: left;
+    width: calc(100% - 230px);
+    height: 50px;
+    border-bottom: solid 1px;
+}
+
+header > p {
+    line-height: 50px;
+    margin: 0;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+nav {
+    float: right;
+    width: 230px;
+    height: 50px;
+    border-bottom: solid 1px;
+}
+
+nav > a {
+    line-height: 50px;
+    margin-left: 15px;
+    margin-right: 15px;
+    font-weight: bold;
+}
+
+main {
+    overflow: auto;
+    width: 100%;
+    height: calc(100% - 77px);
+    border-bottom: solid 1px;
+    clear: both;
+}
+
+footer {
+    width: 100%;
+    height: 25px;
+}
+
+footer > p {
+    margin: 0;
+    margin-left: 10px;
+    margin-right: 10px;
+}

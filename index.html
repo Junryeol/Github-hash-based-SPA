@@ -19,20 +19,23 @@
 
     <script src="github.js"></script>
     <script src="hashSPA.js"></script>
-    <script src="snarkdown.js"></script>
 
     <link rel="stylesheet" href="normalize.css">
     <link rel="stylesheet" href="skeleton.css">
+    <link rel="stylesheet" href="home.css">
 
-    <script>github = new Github();</script>
-    <script src="home.js"></script>
 </head>
 
 <body>
     <header>
-        <div>
-            <p>Github & hash based SPA</p>
-        </div>
+        <p>Github & hash based SPA</p>
+    </header>
+    <nav>
+        <a class="logined" href="#repos">Repos</a>
+        <a class="logined" href="#chat">Chat</a>
+        <a class="logined" href="#logout">Logout</a>
+    </nav>
+    <main>
         <div>
             <input id="repos-search" type="text" placeholder="repositories name">
             <button onclick="setHash('homeSearchRepos')">Repos Search</button>
@@ -42,20 +45,17 @@
             <input id="user-pw" type="password" placeholder="github pw">
             <button onclick="setHash('homeLogin')">Login</button>
         </div>
-    </header>
-    <nav>
-
-    </nav>
-    <aside>
         <ol id="repos-list">
         </ol>
-    </aside>
+    </main>
     <footer>
-
+        <p>Github & hash based SPA</p>
     </footer>
-    <script>
-    getJS("../password.js");
-    </script>
+
+    <script>github = new Github();</script>
+    <script src="home.js"></script>
+    <script src="snarkdown.js"></script>
+    <script src="../password.js"></script>
 </body>
 
 </html>
