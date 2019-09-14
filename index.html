@@ -31,15 +31,14 @@
     </header>
     <nav id="nav">
         <!-- <input class="logouted" type="text" name="" value=""> -->
-        <a href="#mypc">MyPC</a>
+        <a href="#filePage">Files</a>
         <a href="#searchPage">Github</a>
         <a href="#logout">Login</a>
     </nav>
     <main id="main">
-        <form id="login-field" class="login-field" onsubmit="return false;">
-            <input id="user-id" type="text" placeholder="github id">
-            <input id="user-pw" type="password" placeholder="github pw">
-            <input type="submit" value="Login" onclick="hash('login')">
+        <form id="file-field" class="file-field" onsubmit="return false;">
+            <input type="file" multiple>
+            <p>Drag your files here or click in this area.</p>
         </form>
     </main>
     <footer id="footer">
@@ -49,7 +48,7 @@
     <script>github = new Github();</script>
     <script src="home.js"></script>
     <script src="snarkdown.js"></script>
-    <script src="../password.js"></script>
+    <script src="./password.js"></script>
 </body>
 
 </html>

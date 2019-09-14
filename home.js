@@ -72,7 +72,7 @@ function logout(){
     </form>
     `;
     document.getElementById('nav').innerHTML = `
-        <a href="#mypc">MyPC</a>
+        <a href="#filePage">File</a>
         <a href="#searchPage">Github</a>
         <a href="#logout">Login</a>
     `;
@@ -83,6 +83,15 @@ function searchPage(){
     <form id="login-field" class="login-field" onsubmit="return false;">
         <input id="repos-name" type="text" placeholder="github repos name">
         <input type="submit" value="Search" onclick="hash('searchRepos')">
+    </form>
+    `;
+}
+
+function filePage(){
+    document.getElementById('main').innerHTML = `
+    <form id="file-field" class="file-field" onsubmit="return false;">
+        <input type="file" multiple>
+        <p>Drag your files here or click in this area.</p>
     </form>
     `;
 }
