@@ -23,32 +23,26 @@
     <link rel="stylesheet" href="normalize.css">
     <link rel="stylesheet" href="skeleton.css">
     <link rel="stylesheet" href="home.css">
-
 </head>
 
 <body>
-    <header>
+    <header id="header">
         <p>Github & hash based SPA</p>
     </header>
-    <nav>
-        <a class="logined" href="#repos">Repos</a>
-        <a class="logined" href="#chat">Chat</a>
-        <a class="logined" href="#logout">Logout</a>
+    <nav id="nav">
+        <!-- <input class="logouted" type="text" name="" value=""> -->
+        <a href="#mypc">MyPC</a>
+        <a href="#searchPage">Github</a>
+        <a href="#logout">Login</a>
     </nav>
-    <main>
-        <div>
-            <input id="repos-search" type="text" placeholder="repositories name">
-            <button onclick="setHash('homeSearchRepos')">Repos Search</button>
-        </div>
-        <div id="user-info">
+    <main id="main">
+        <form id="login-field" class="login-field" onsubmit="return false;">
             <input id="user-id" type="text" placeholder="github id">
             <input id="user-pw" type="password" placeholder="github pw">
-            <button onclick="setHash('homeLogin')">Login</button>
-        </div>
-        <ol id="repos-list">
-        </ol>
+            <input type="submit" value="Login" onclick="hash('login')">
+        </form>
     </main>
-    <footer>
+    <footer id="footer">
         <p>Github & hash based SPA</p>
     </footer>
 

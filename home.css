@@ -9,11 +9,14 @@ header {
     border-bottom: solid 1px;
 }
 
-header > p {
+header>p {
     line-height: 50px;
     margin: 0;
     margin-left: 15px;
     margin-right: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 nav {
@@ -23,7 +26,7 @@ nav {
     border-bottom: solid 1px;
 }
 
-nav > a {
+nav>a {
     line-height: 50px;
     margin-left: 15px;
     margin-right: 15px;
@@ -43,8 +46,75 @@ footer {
     height: 25px;
 }
 
-footer > p {
+footer>p {
     margin: 0;
     margin-left: 10px;
     margin-right: 10px;
+}
+
+.login-field {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+.login-field>input, .login-field>p {
+    display: block;
+    width: 230px;
+}
+
+.login-field>p {
+    text-align: center;
+    font-weight: bold;
+    color: Crimson;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.fadein {
+    -webkit-animation: fadein 1s;
+    -moz-animation: fadein 1s;
+    animation: fadein 1s;
 }

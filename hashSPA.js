@@ -1,14 +1,14 @@
-function getJS(url) {
+function JS(url) {
     if (!document.getElementById(url))
         document.write("\<script id='" + url + "' src='" + url + "'\>\<\/script\>");
 }
 
-function getCSS(url) {
+function CSS(url) {
     if (!document.getElementById(url))
         document.write("\<link rel='stylesheet' id='" + url + "' href='" + url + "'\>");
 }
 
-function setHash(string){
+function hash(string){
     if(window.location.hash.slice(1) == string)
         hashChange();
     else
