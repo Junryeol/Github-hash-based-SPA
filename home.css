@@ -50,6 +50,9 @@ footer>p {
     margin: 0;
     margin-left: 10px;
     margin-right: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .login-field {
@@ -77,13 +80,13 @@ footer>p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: absolute;
-      top: calc(25% - 10px);
-      left: calc(25% - 10px);
-      margin-top: -25%;
-      margin-left: -25%;
-      width: 50%;
-      height: 50%;
+    position:relative;
+    top: calc(25% - 10px);
+    left: calc(25% - 10px);
+    margin-top: -25%;
+    margin-left: -25%;
+    width: 50%;
+    height: 50%;
     border: 5px dashed;
     margin: 5px;
 }
@@ -97,7 +100,7 @@ footer>p {
 }
 .file-field>p {
     text-align: center;
-    margin: 0;
+    margin: 10px;
 }
 
 @keyframes fadein {

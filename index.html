@@ -1,14 +1,3 @@
-<!--
-    TODO:
-        header
-        nav
-        aside
-        footer
-
-        create section
-        reomve password.js
--->
-
 <!DOCTYPE html>
 <html>
 
@@ -19,6 +8,7 @@
 
     <script src="github.js"></script>
     <script src="hashSPA.js"></script>
+    <script src="snarkdown.js"></script>
 
     <link rel="stylesheet" href="normalize.css">
     <link rel="stylesheet" href="skeleton.css">
@@ -30,25 +20,18 @@
         <p>Github & hash based SPA</p>
     </header>
     <nav id="nav">
-        <!-- <input class="logouted" type="text" name="" value=""> -->
         <a href="#filePage">Files</a>
         <a href="#searchPage">Github</a>
-        <a href="#logout">Login</a>
+        <a href="#loginPage">Login</a>
     </nav>
     <main id="main">
-        <form id="file-field" class="file-field" onsubmit="return false;">
-            <input type="file" multiple>
-            <p>Drag your files here or click in this area.</p>
-        </form>
     </main>
     <footer id="footer">
         <p>Github & hash based SPA</p>
     </footer>
 
-    <script>github = new Github();</script>
     <script src="home.js"></script>
-    <script src="snarkdown.js"></script>
-    <script src="./password.js"></script>
+    <script src="../password.js"></script>
 </body>
 
 </html>

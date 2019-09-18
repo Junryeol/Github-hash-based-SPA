@@ -196,13 +196,13 @@ Github.prototype.stargazers = function(owner_name, repos_name) {
     return this.get("https://api.github.com/repos/"+owner_name+"/"+repos_name+"/stargazers", null);
 }
 Github.prototype.starred = function(owner_name, repos_name) {
-    return this.get("https://api.github.com/starred/"+owner_name+"/"+repos_name, null);
+    return this.get("https://api.github.com/user/starred/"+owner_name+"/"+repos_name, null);
 }
 Github.prototype.starring = function(owner_name, repos_name) {
-    return this.put("https://api.github.com/starred/"+owner_name+"/"+repos_name, null);
+    return this.put("https://api.github.com/user/starred/"+owner_name+"/"+repos_name, null);
 }
 Github.prototype.unstarring = function(owner_name, repos_name) {
-    return this.delete("https://api.github.com/starred/"+owner_name+"/"+repos_name, null);
+    return this.delete("https://api.github.com/user/starred/"+owner_name+"/"+repos_name, null);
 }
 
 /* Gist Comment */
