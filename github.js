@@ -14,9 +14,17 @@ Github.prototype.init = function() {
 }
 
 /* User Auth */
-Github.prototype.login = function(user_name_or_email, password) {
+Github.prototype.basicAuth = function(user_name_or_email, password) {
     var that = this;
     this.authentication = "Basic " + btoa(user_name_or_email + ":" + password);
+    return this.get("https://api.github.com/user").then(function(data) {
+        that.user_name = data.login;
+        return data;
+    });
+}
+Github.prototype.tokenAuth = function(token) {
+    var that = this;
+    this.authentication = "Token " + token;
     return this.get("https://api.github.com/user").then(function(data) {
         that.user_name = data.login;
         return data;
@@ -277,13 +285,15 @@ Github.prototype.restful = function(method, address, params) {
         var xhr = new XMLHttpRequest();
 
         xhr.onload = function() {
-            resolve(JSON.parse(xhr.responseText));
+            if(xhr.responseText)
+                resolve(JSON.parse(xhr.responseText));
         };
 
         xhr.open(method, address);
 
-        if (authentication)
+        if (authentication){
             xhr.setRequestHeader("Authorization", authentication);
+        }
 
         if (params)
             xhr.send(JSON.stringify(params));
@@ -291,3 +301,5 @@ Github.prototype.restful = function(method, address, params) {
             xhr.send();
     });
 }
+
+const github = new Github();
