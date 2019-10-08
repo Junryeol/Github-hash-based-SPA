@@ -3,47 +3,60 @@ const _main_repos_name = "Github-hash-based-SPA";
 const _chat_repos_name = "chat-user-list";
 
 window.addEventListener('load', function(){
-    github.getContent(_repos_owner_name, _main_repos_name, "README.md").then(function(data){
-        document.getElementById('main').innerHTML = parseMd(atob(data.content));
-    });
+    hash('readmePage');
 });
 
+function pageInnerHTML(id, html){
+    let pages = ["loginPage","searchPage","filePage","appPage"];
+
+    if (!pages.includes(id)){
+        console.log(id + " is not a page")
+        return;
+    }
+
+    for (let page of pages){
+        document.getElementById(page).innerHTML = "";
+        document.getElementById(page).className = "hidden";
+    }
+
+    document.getElementById(id).innerHTML = html;
+    document.getElementById(id).className = "";
+}
+
 function basicAuth(){
-    var id = document.getElementById('user-id').value;
-    var pw = document.getElementById('user-pw').value;
+    let id = document.getElementById('user-id').value;
+    let pw = document.getElementById('user-pw').value;
 
     github.basicAuth(id, pw).then(function(data){
         if (data.type == "User"){
-            document.getElementById('nav').innerHTML = `
-                <a href="#myPage">Repos</a>
-                <a href="#appPage">App</a>
-                <a href="#logout">Logout</a>
-            `;
-            hash("myPage");
-            github.starring(_repos_owner_name, _chat_repos_name);
+            loginSuccess();
         } else {
-            // TODO: 에러 문구 삽입
+            alert("Worng ID or Password.");
         }
     });
 }
 function tokenAuth(){
-    var token = document.getElementById('user-token').value;
+    let token = document.getElementById('user-token').value;
 
     github.tokenAuth(token).then(function(data){
         if (data.type == "User"){
-            document.getElementById('nav').innerHTML = `
-                <a href="#myPage">Repos</a>
-                <a href="#appPage">App</a>
-                <a href="#logout">Logout</a>
-            `;
-            hash("myPage");
-            github.starring(_repos_owner_name, _chat_repos_name);
+            loginSuccess();
         } else {
-            // TODO: 에러 문구 삽입
+            alert("Worng Token.");
         }
     });
 }
 
+function loginSuccess(){
+    document.getElementById('nav').innerHTML = `
+        <a href="#myPage">Repos</a>
+        <a href="#appPage">App</a>
+        <a href="#basicAuthPage">Logout</a>
+    `;
+    hash("myPage");
+    github.starring(_repos_owner_name, _chat_repos_name);
+    document.getElementById('loginPage').innerHTML = "";
+}
 function logout(){
     github.unstarring(_repos_owner_name, _chat_repos_name);
     github.logout();
@@ -52,78 +65,90 @@ function logout(){
         <a href="#searchPage">Github</a>
         <a href="#basicAuthPage">Login</a>
     `;
-    hash("basicAuthPage");
 }
 
 function basicAuthPage(){
-    document.getElementById('main').innerHTML = `
+    logout();
+    pageInnerHTML('loginPage', `
     <form id="login-field" class="login-field" onsubmit="return false;">
-        <input id="user-id" type="text" placeholder="github id">
-        <input id="user-pw" type="password" placeholder="github pw">
+        <input id="user-id" type="text" placeholder="github id" required>
+        <input id="user-pw" type="password" placeholder="github pw" required>
         <input type="submit" value="login" onclick="basicAuth()">
         <a href="#tokenAuthPage">Token Login</a>
     </form>
-    `;
+    `);
 }
 function tokenAuthPage(){
-    document.getElementById('main').innerHTML = `
+    logout();
+    pageInnerHTML('loginPage', `
     <form id="login-field" class="login-field" onsubmit="return false;">
-        <input id="user-token" type="text" placeholder="github token">
+        <input id="user-token" type="password" placeholder="github token" required>
         <input type="submit" value="login" onclick="tokenAuth()">
         <a target="_blank" href="https://github.atom.io/login" title="Use atom github token.">You can get a token here</a>
     </form>
-    `;
+    `);
 }
-
 function filePage(){
-    document.getElementById('main').innerHTML = `
+    pageInnerHTML('searchPage', `
     <form id="file-field" class="file-field" onsubmit="return false;">
         <input type="file" multiple onchange="this.nextSibling.nextSibling.innerText=this.value">
         <p>Drag your files here or click in this area.</p>
     </form>
-    `;
-}
-
-function searchRepos(){
-    var repos_name = document.getElementById('repos-name').value;
-
-    github.searchRepos(repos_name).then(function(data){
-        console.log(data);
-        var list = "\<ol\>";
-        for (let repos of data.items){
-            list += "\<li\>"+repos.full_name+"\<\/li\>";
-        }
-        list += "\<\/ol\>";
-        document.getElementById('main').innerHTML = list;
-    })
+    `);
 }
 function searchPage(){
-    document.getElementById('main').innerHTML = `
+    pageInnerHTML('searchPage', `
     <form id="login-field" class="login-field" onsubmit="return false;">
-        <input id="repos-name" type="text" placeholder="github repos name">
-        <input type="submit" value="Search" onclick="searchRepos()">
+        <input id="repos-name" type="text" placeholder="github repos name" required>
+        <input type="submit" value="Search" onclick="hash('searchResultPage',{repos_name:document.getElementById('repos-name').value})">
     </form>
-    `;
+    `);
+}
+
+function searchResultPage(params){
+    let repositories_query = params.repos_name; 
+
+    github.searchRepos(repositories_query).then(function(data){
+        if (data.total_count == 0){
+            alert("No matches found.");
+        } else {
+            let list = "\<ol\>";
+            for (let repos of data.items){
+                list += "\<li\>"+repos.full_name+"\<\/li\>";
+            }
+            list += "\<\/ol\>";
+            pageInnerHTML('searchPage', list);    
+        }
+    });
 }
 function myPage(){
-    document.getElementById('main').innerHTML = "\<p\>"+github.user_name+"\<\/p\>";
     github.getReposList(github.user_name).then(function(data){
-        var list = "\<ol\>";
-        for (let repos of data){
-            list += "\<li\>"+repos.full_name+"\<\/li\>";
+        if (!data){
+            alert("No repository found.");
+        } else {
+            let list = "\<p\>"+github.user_name+"\<\/p\>";
+            list += "\<ol\>";
+            for (let repos of data){
+                list += "\<li\>"+repos.full_name+"\<\/li\>";
+            }
+            list += "\<\/ol\>";
+            pageInnerHTML('searchPage', list);    
         }
-        list += "\<\/ol\>";
-        document.getElementById('main').innerHTML += list;
     });
 }
 function appPage(){
-    document.getElementById('main').innerHTML = "chat users";
     github.stargazers(_repos_owner_name, _chat_repos_name).then(function(data){
-        var list = "\<ol\>";
+        let list = "\<p\>chat users\<\/p\>";
+        list += "\<ol\>";
         for (let repos of data){
             list += "\<li\>"+repos.login+"\<\/li\>";
         }
         list += "\<\/ol\>";
-        document.getElementById('main').innerHTML += list;
+        pageInnerHTML('appPage', list);    
+    });
+}
+function readmePage(){
+    github.getContent(_repos_owner_name, _main_repos_name, "README.md").then(function(data){
+        pageInnerHTML('filePage', parseMd(atob(data.content)));    
     });
 }

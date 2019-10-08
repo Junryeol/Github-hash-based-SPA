@@ -6,14 +6,14 @@
 
     <title>Github & hash based SPA</title>
 
-    <link rel="stylesheet" href="normalize.css">
-    <link rel="stylesheet" href="skeleton.css">
-    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" id="normalize.css" href="normalize.css">
+    <link rel="stylesheet" id="skeleton.css" href="skeleton.css">
+    <link rel="stylesheet" id="home.css" href="home.css">
 </head>
 
 <body>
     <header id="header">
-        <p>Github & hash based SPA</p>
+        <a href="#readmePage">Github & hash based SPA</a>
     </header>
     <nav id="nav">
         <a href="#filePage">Files</a>
@@ -21,15 +21,19 @@
         <a href="#basicAuthPage">Login</a>
     </nav>
     <main id="main">
+        <div id="loginPage"></div>
+        <div id="searchPage"></div>
+        <div id="filePage"></div>
+        <div id="appPage"></div>
     </main>
     <footer id="footer">
         <p>Github & hash based SPA</p>
     </footer>
 
-    <script src="home.js"></script>
-    <script src="github.js"></script>
-    <script src="hashSPA.js"></script>
-    <script src="snarkdown.js"></script>
+    <script id="home.js" src="home.js"></script>
+    <script id="github.js" src="github.js"></script>
+    <script id="hashSPA.js" src="hashSPA.js"></script>
+    <script id="snarkdown.js" src="snarkdown.js"></script>
     <script src="../password.js"></script>
 </body>
 

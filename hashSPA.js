@@ -1,28 +1,26 @@
-function JS(url) {
+function js(url) {
     if (!document.getElementById(url))
         document.write("\<script id='" + url + "' src='" + url + "'\>\<\/script\>");
 }
 
-function CSS(url) {
+function css(url) {
     if (!document.getElementById(url))
         document.write("\<link rel='stylesheet' id='" + url + "' href='" + url + "'\>");
 }
 
-function hash(string){
-    if(window.location.hash.slice(1) == string)
+function hash(hash_string, params=null){
+    var hash_query = hash_string;
+    
+    if (params != null){
+        hash_query += "?" + Object.keys(params).map(function(key) {
+            return key + '=' + params[key]
+        }).join('&');
+    }
+
+    if(window.location.hash.slice(1) == hash_query)
         hashChange();
     else
-        window.location.hash = string;
-}
-
-function overwriteElement(elem, html){
-    var div = document.createElement('div');
-    div.innerHTML = html.trim();
-    div.firstChild;
-
-    var parent = elem.parentNode;
-    parent.insertBefore(div.firstChild, elem);
-    parent.removeChild(elem);
+        window.location.hash = hash_query;
 }
 
 function checkFunction(function_name) {

@@ -10,7 +10,7 @@ header {
     border-bottom: solid 1px;
 }
 
-header>p {
+header>a {
     line-height: 50px;
     margin: 0;
     margin-left: 15px;
@@ -35,11 +35,20 @@ nav>a {
 }
 
 main {
-    overflow: auto;
     width: 100%;
     height: calc(100% - 77px);
     border-bottom: solid 1px;
     clear: both;
+}
+
+main>div {
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+}
+
+.hidden {
+    display: none;
 }
 
 footer {
@@ -65,15 +74,9 @@ footer>p {
     width: 100%;
     margin: 0;
 }
-.login-field>input, .login-field>p {
+.login-field>input {
     display: block;
     width: 230px;
-}
-.login-field>p {
-    text-align: center;
-    font-weight: bold;
-    color: Crimson;
-    margin: 0;
 }
 
 .file-field {
@@ -102,50 +105,4 @@ footer>p {
 .file-field>p {
     text-align: center;
     margin: 10px;
-}
-
-@keyframes fadein {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-@-moz-keyframes fadein {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-@-webkit-keyframes fadein {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-@-o-keyframes fadein {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-.fadein {
-    -webkit-animation: fadein 1s;
-    -moz-animation: fadein 1s;
-    animation: fadein 1s;
 }
