@@ -167,7 +167,7 @@ function readmePage(){
             return parseMd(atob(data));
         }, data.content
         , [
-            "file:///C:/Users/PC/Desktop/Github-hash-based-SPA/snarkdown.js"
+            "https://junryeol.github.io/Github-hash-based-SPA/snarkdown.js"
         ]).then(function(result){
             pageInnerHTML('filePage', result);    
         });
