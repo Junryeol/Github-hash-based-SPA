@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Github & hash based SPA</title>
+    <title id="title"></title>
 
     <link rel="stylesheet" id="normalize.css" href="normalize.css">
     <link rel="stylesheet" id="skeleton.css" href="skeleton.css">
@@ -13,28 +13,33 @@
 
 <body>
     <header id="header">
-        <a href="#readmePage">Github & hash based SPA</a>
+        <a id="header-title" href="#readmePage"></a>
     </header>
+
     <nav id="nav">
-        <a href="#filePage">Files</a>
-        <a href="#searchPage">Github</a>
-        <a href="#basicAuthPage">Login</a>
     </nav>
+    
     <main id="main">
-        <div id="loginPage"></div>
-        <div id="searchPage"></div>
-        <div id="filePage"></div>
-        <div id="appPage"></div>
+        <script data-ad-client="ca-pub-5853859413258990" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <div id="loginPage" class="hidden"></div>
+        <div id="searchPage" class="hidden"></div>
+        <div id="filePage" class="hidden"></div>
+        <div id="appPage" class="hidden"></div>
     </main>
+    
     <footer id="footer">
-        <p>Github & hash based SPA</p>
+        <p id="footer-title"></p>
     </footer>
+
+    <markdown-wc></markdown-wc>
 
     <script id="home.js" src="home.js"></script>
     <script id="github.js" src="github.js"></script>
     <script id="hashSPA.js" src="hashSPA.js"></script>
-    <script id="snarkdown.js" src="snarkdown.js"></script>
-    <script src="../password.js"></script>
+    <script id="webworker.js" src="webworker.js"></script>
+    <script id="markdown-wc.js" src="markdown-wc.js"></script>
+    
+    <!-- <script src="../password.js"></script> -->
 </body>
 
 </html>

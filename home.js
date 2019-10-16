@@ -1,21 +1,28 @@
+// TODO: kill process and remove page
+
 const _repos_owner_name = "Junryeol";
 const _main_repos_name = "Github-hash-based-SPA";
 const _chat_repos_name = "chat-user-list";
+const _pages = ["loginPage","searchPage","filePage","appPage"];
 
 window.addEventListener('load', function(){
+    let titles = ["title","header-title","footer-title"];
+
+    for (let title of titles){
+        document.getElementById(title).innerText = _main_repos_name;
+    }
+
     hash('readmePage');
+    logout();
 });
 
 function pageInnerHTML(id, html){
-    let pages = ["loginPage","searchPage","filePage","appPage"];
-
-    if (!pages.includes(id)){
+    if (!_pages.includes(id)){
         console.log(id + " is not a page")
         return;
     }
 
-    for (let page of pages){
-        document.getElementById(page).innerHTML = "";
+    for (let page of _pages){
         document.getElementById(page).className = "hidden";
     }
 
@@ -58,13 +65,18 @@ function loginSuccess(){
     document.getElementById('loginPage').innerHTML = "";
 }
 function logout(){
-    github.unstarring(_repos_owner_name, _chat_repos_name);
-    github.logout();
+    if (github.user_name){
+        github.unstarring(_repos_owner_name, _chat_repos_name);
+        github.logout();
+    }
     document.getElementById('nav').innerHTML = `
         <a href="#filePage">Files</a>
         <a href="#searchPage">Github</a>
         <a href="#basicAuthPage">Login</a>
     `;
+    for (let page of _pages){
+        document.getElementById(page).innerHTML = "";
+    }
 }
 
 function basicAuthPage(){
@@ -137,6 +149,8 @@ function myPage(){
     });
 }
 function appPage(){
+    // TODO: app list로 변경
+    // TODO: chat app로 변경
     github.stargazers(_repos_owner_name, _chat_repos_name).then(function(data){
         let list = "\<p\>chat users\<\/p\>";
         list += "\<ol\>";
@@ -149,6 +163,13 @@ function appPage(){
 }
 function readmePage(){
     github.getContent(_repos_owner_name, _main_repos_name, "README.md").then(function(data){
-        pageInnerHTML('filePage', parseMd(atob(data.content)));    
+        webWorker(function(data){
+            return parseMd(atob(data));
+        }, data.content
+        , [
+            "file:///C:/Users/PC/Desktop/Github-hash-based-SPA/snarkdown.js"
+        ]).then(function(result){
+            pageInnerHTML('filePage', result);    
+        });
     });
 }

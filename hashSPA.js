@@ -28,7 +28,7 @@ function checkFunction(function_name) {
         hash_func = eval(function_name)
         if (typeof hash_func == "function")
             return hash_func;
-    } catch {}
+    } catch (e) {}
 
     console.log(function_name + " is not function.");
     return false;
